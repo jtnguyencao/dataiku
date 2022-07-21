@@ -1,0 +1,43 @@
+version: "3.9"
+
+networks:
+   my_network:
+     driver: bridge
+
+services:
+  db_mysql:
+    container_name: my_database
+    image: mysql:5.7
+    networks:
+       - my_network
+    volumes:
+      - db_mysql:/var/lib/mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: jamesdataiku
+      MYSQL_DATABASE: jamesdataiku
+      MYSQL_USER: jamesdataiku
+      MYSQL_PASSWORD: jamesdataiku
+    
+  dss:
+    build:
+      context: ./dss
+      dockerfile: Dockerfile
+    networks:
+      - my_network
+    container_name: my_app
+    depends_on:
+      - db_mysql
+    volumes:
+      - dss_data:/home/dataiku/dss
+    restart: always
+    ports:
+      - 10000:10000
+    links:
+      - db_mysql
+
+volumes:
+  db_mysql:
+  dss_data:

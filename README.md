@@ -1,1 +1,1 @@
-"# jtnguyencao" 
+Follow instructions on here https://docs.google.com/document/d/121iJ-BxQtiIAy9YCqjD2q78ZA5CuPQUQco_qQL2K-Bg/edit
